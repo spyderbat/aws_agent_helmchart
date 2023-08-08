@@ -5,9 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app: aws-agent
-    # TODO - see version trick in clustermonitor.yaml?
-
-
 spec:
   replicas: 1
   selector:
@@ -45,7 +42,7 @@ spec:
           configMap:
             name: aws-agent-configmap
         - name: secrets-volume
-{{- if .Values.awsConfig.secretsManager.enabled }}
+{{- if .Values.secretsManager.enabled }}
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true

@@ -21,14 +21,12 @@ resources:
     cpu: 1000m
     memory: 10240Mi
 
-  # The log level for the agent
-  log_level: INFO
-
-
 # Agent aws service collection settings
 awsAgentConfig:
+  # The spyderbat org id for your organization
   spyderbat_org: ZTqFubXhd4Sc5v6q3mIE
-  spyderbat_api_url: https://api.kangaroobat.net
+  # The spyderbat api url
+  spyderbat_api_url: https://api.prod.spyderbat.com
 
   # Flow control settings for the aws-agent spyderbat api send queue
   # Nr of messages in queue prior to sending
@@ -43,42 +41,56 @@ awsAgentConfig:
 
   pollers:
   - service: guardduty
-    role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
-    polling_interval: 5
+    # Optionally, you can specify which aws role to assume to pull data
+    # role_arn: your arn here
+
+    # The polling interval in seconds
+    polling_interval: 30
+    # The initial lookback in seconds when polling guardduty findings for the first time
     initial_lookback: 86400
+    # Which regions to poll, and with what settings. Note you can override the
+    # general settings (role_arn, polling_interval and initial_loopback) per region
+    # by adding these properties to the region map
     regions:
     - region: us-east-1
     - region: us-east-2
     - region: us-west-2
-      polling_interval: 10
-      role_arn: something_asdfasdfasdfasdfasdfasdfsdafelse
   - service: ec2tags
-    # role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
+    # Optionally, you can specify which aws role to assume to pull data
+    # role_arn: your arn here
     polling_interval: 5
     regions:
     - region: us-east-1
     - region: us-east-2
-      polling_interval: 13
-      role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
     - region: us-west-1
-    ec2tags:
-      # Enable collection of ec2 instance tags
-      enabled: true
 
 credentials:
-  aws_access_key_id: test
-  aws_secret_access_key: test
-  spyderbat_api_key: test
+  # Optionally you can specify the aws credentials to use for the agent explicitly here
+  # (if you are not using a service account that assumes an IAM role to pull data)
+  # we recommend setting these with the --set option during helm install
+  aws_access_key_id:
+  aws_secret_access_key:
+
+  # The spyderbat api key to use for the agent.
+  # This does not need to be set if you store it in AWS secrets manager (see next section)
+  # we recommend setting this with the --set option during helm install
+  spyderbat_api_key:
 
 secretsManager:
   enabled: false
-  secretArn: "secretarn"
+  secretArn: 'arn to your secret in secrets manager that has the spyderbat api key'
 
 serviceAccount:
-  create: false
+  # Set create to true if you want to create a service account for the agent and have it assume
+  # an AWS role for interacting with AWS (recommended)
+  create: true
   name: aws-agent-serviceaccount
+  # Use the below annotation for EKS based clusters to associate the service account with an IAM role
   awsRoleAnnotation: eks.amazonaws.com/role-arn
-  awsRoleArn: arn:aws:iam::429857113775:role/SpyderbatAWSAgentRole
+
+  # Provide the ARN to the role with the appropriate trust policy and
+  # permissions to interact with AWS services
+  awsRoleArn: 'arn to IAM role that the service account should assume'
 
 
 
