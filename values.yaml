@@ -24,7 +24,7 @@ resources:
 # Agent aws service collection settings
 awsAgentConfig:
   # The spyderbat org id for your organization
-  spyderbat_org: ZTqFubXhd4Sc5v6q3mIE
+  spyderbat_org: your spyderbat org id here
   # The spyderbat api url
   spyderbat_api_url: https://api.prod.spyderbat.com
 
@@ -78,7 +78,7 @@ credentials:
 
 secretsManager:
   enabled: false
-  secretArn: 'arn to your secret in secrets manager that has the spyderbat api key'
+  secretArn: arn of the secret in secrets manager that has the spyderbat api key
 
 serviceAccount:
   # Set create to true if you want to create a service account for the agent and have it assume
@@ -90,90 +90,4 @@ serviceAccount:
 
   # Provide the ARN to the role with the appropriate trust policy and
   # permissions to interact with AWS services
-  awsRoleArn: 'arn to IAM role that the service account should assume'
-
-
-
-
-
-
-
-
-
-
-
-
-
-replicaCount: 1
-
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-# serviceAccount:
-#   # Specifies whether a service account should be created
-#   create: true
-#   # Annotations to add to the service account
-#   annotations: {}
-#   # The name of the service account to use.
-#   # If not set and create is true, a name is generated using the fullname template
-#   name: ""
-
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 80
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-# resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+  awsRoleArn: arn of the IAM role that the service account should assume
