@@ -1,0 +1,167 @@
+# Default values for aws_agent_helmchart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Image location for the Spyderbat AWS agent
+image:
+  registry: public.ecr.aws
+  # Full image
+  repository: a6j2k0g1/aws-agent
+  tag: latest
+  pullPolicy: Always
+  pullSecrets: []
+
+
+# Reasonable resource defaults.  May need to be larger for particularly large aws environments
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 10240Mi
+
+  # The log level for the agent
+  log_level: INFO
+
+
+# Agent aws service collection settings
+awsAgentConfig:
+  spyderbat_org: ZTqFubXhd4Sc5v6q3mIE
+  spyderbat_api_url: https://api.kangaroobat.net
+
+  # Flow control settings for the aws-agent spyderbat api send queue
+  # Nr of messages in queue prior to sending
+  send_buffer_size: 50
+
+  # The send buffer max delay if less than send_buffer_size messages
+  # are in the queue
+  send_buffer_max_delay: 15
+
+  # The log level for the agent
+  log_level: INFO
+
+  pollers:
+  - service: guardduty
+    role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
+    polling_interval: 5
+    initial_lookback: 86400
+    regions:
+    - region: us-east-1
+    - region: us-east-2
+    - region: us-west-2
+      polling_interval: 10
+      role_arn: something_asdfasdfasdfasdfasdfasdfsdafelse
+  - service: ec2tags
+    # role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
+    polling_interval: 5
+    regions:
+    - region: us-east-1
+    - region: us-east-2
+      polling_interval: 13
+      role_arn: arn:aws:iam::429857113775:role/GuardDutyReadOnly
+    - region: us-west-1
+    ec2tags:
+      # Enable collection of ec2 instance tags
+      enabled: true
+
+credentials:
+  aws_access_key_id: test
+  aws_secret_access_key: test
+  spyderbat_api_key: test
+
+secretsManager:
+  enabled: false
+  secretArn: "secretarn"
+
+serviceAccount:
+  create: false
+  name: aws-agent-serviceaccount
+  awsRoleAnnotation: eks.amazonaws.com/role-arn
+  awsRoleArn: arn:aws:iam::429857113775:role/SpyderbatAWSAgentRole
+
+
+
+
+
+
+
+
+
+
+
+
+
+replicaCount: 1
+
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# serviceAccount:
+#   # Specifies whether a service account should be created
+#   create: true
+#   # Annotations to add to the service account
+#   annotations: {}
+#   # The name of the service account to use.
+#   # If not set and create is true, a name is generated using the fullname template
+#   name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

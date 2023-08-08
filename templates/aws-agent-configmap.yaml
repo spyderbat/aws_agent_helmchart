@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-agent-configmap
+  namespace: {{ .Release.Namespace }}
+data:
+  aws-config.yaml: |
+    {{ .Values.awsAgentConfig | toYaml | nindent 4 }}
+  aws-config.json: |
+    {
+        "spyderbat_org": "{{ .Values.spyderbatConfig.org }}",
+        "spyderbat_api_url": "{{ .Values.spyderbatConfig.api_url }}",
+        "send_buffer_size": {{ .Values.agentConfig.send_buffer_size }},
+        "send_buffer_max_delay": {{ .Values.agentConfig.send_buffer_max_delay }},
+        "log_level": "{{ .Values.agentConfig.log_level }}",
+        "pollers": [
+{{- if .Values.awsConfig.guardduty.enabled }}
+{{- range .Values.awsConfig.guardduty.regions }}
+            {
+                "service": "guardduty",
+                "region": "{{ . }}",
+{{- if $.Values.awsConfig.guardduty.role_arn }}
+                "role_arn": "{{- $.Values.awsConfig.guardduty.role_arn }}",
+{{- end }}
+                "polling_interval": {{ $.Values.awsConfig.guardduty.polling_interval }},
+                "initial_lookback": {{ $.Values.awsConfig.guardduty.initial_lookback }}
+            },
+{{- end }}
+{{- end }}
+
+{{- if .Values.awsConfig.ec2tags.enabled }}
+{{- range .Values.awsConfig.ec2tags.regions }}
+            {
+                "service": "ec2tags",
+                "region": "{{ . }}",
+{{- if $.Values.awsConfig.ec2tags.role_arn }},
+                "role_arn": "{{- $.Values.awsConfig.ec2tags.role_arn }}",
+{{- end }}
+                "polling_interval": {{ $.Values.awsConfig.ec2tags.polling_interval }}
+            },
+{{- end }}
+{{- end }}
+        ]
+    }
