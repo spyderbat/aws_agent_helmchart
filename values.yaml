@@ -79,8 +79,7 @@ credentials:
   # we recommend setting this with the --set option during helm install
   spyderbat_api_key:
 
-# TODO - make clear this is aws secret manager
-secretsManager:
+awsSecretsManager:
   enabled: false
   secretArn: arn of the secret in secrets manager that has the spyderbat api key
 
