@@ -84,13 +84,17 @@ awsSecretsManager:
   secretArn: arn of the secret in secrets manager that has the spyderbat api key
 
 serviceAccount:
-  # Set create to true if you want to create a service account for the agent and have it assume
+  # Set enabled to true if you want to create a service account for the agent and have it assume
   # an AWS role for interacting with AWS (recommended)
+  enabled: true
+
+  # Set create to true if you want the helm chart to create the service account for you
   create: true
+
+  # The name of the service account to use (or create)
   name: aws-agent-serviceaccount
   # Use the below annotation for EKS based clusters to associate the service account with an IAM role
   awsRoleAnnotation: eks.amazonaws.com/role-arn
-
   # Provide the ARN to the role with the appropriate trust policy and
   # permissions to interact with AWS services
   awsRoleArn: arn of the IAM role that the service account should assume
