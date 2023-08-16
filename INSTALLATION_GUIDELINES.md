@@ -98,8 +98,8 @@ If you are using another kubernetes solution that support assuming AWS IAM Roles
 
 ### Deciding on the spyderbat credentials approach
 The spyderbat credential you need to access our backend is the spyderbat api key.
-To find out 
-We provide 2 options to manage this credential
+To find out how to get a spyderbat api key please see <here(need link to spyderbat doc on how to make an api key)>
+We provide 2 options to manage this credential.
 
 #### 1. Use explicitly provided spyderbat api key, managed in kubernetes secret
 The simplest approach is to provide the spyderbat api key as a parameter to the helm chart install.
@@ -115,10 +115,21 @@ credentials:
 ```
 
 #### 2. Use AWS Secrets Manager to store the spyderbat api key
-If you prefer to manager your secrets in a cental place, we offer an integration with AWS Secrets Manager.
+If you prefer to manager your secrets more centrally we offer an integration with AWS Secrets Manager and EKS.
+This option requires the use of a kubernetes service
 To use this option, first take the following preparation steps
+Add the spyderbat api key as a secret in secrets manager, either via the secrets manager UI, or using the following commands
+```bash
+aws secretsmanager create-secret --name \<name\> --region \<region\>
+- aws secretsmanager put-secret-value --secret-id \<name\> --region \<region\> --secret-string "{\"spyderbat_api_key\":\"\<key\>\"}"
+aws secretsmanager get-secret-value --secret-id \<name\> --region \<region\>
+```
 
+helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 
+helm install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --namespace kube-system --set syncSecret.enabled=true
+
+kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 ## Running the helm chart install
 You can now run the install, by running:
