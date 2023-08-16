@@ -25,6 +25,11 @@ resources:
 awsAgentConfig:
   # The spyderbat org id for your organization
   spyderbat_org: your spyderbat org id here
+
+  # The spyderbat source id for the aws agent
+  # if not provided, a source id will be inferred from the spyderbat org id
+  spyderbat_source: your spyderbat source id here
+
   # The spyderbat api url
   spyderbat_api_url: https://api.prod.spyderbat.com
 
