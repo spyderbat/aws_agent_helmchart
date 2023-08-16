@@ -9,15 +9,15 @@ We provide here guidance for 3 levels of security and aws integration for creden
 
 ### 1. AWS credentials and spyderbat credentials explicitly provided and managed in kubernetes secrets
 
-Explanation
-Sample config
+- Explanation
+- Sample config
 
 ### 2. Use of a kubernetes service account that assumes an IAM role to access the AWS resources, and spyderbat credentials explicitly provided and managed in kubernetes secrets
-Explanation
-Sample config
+- Explanation
+- Sample config
 
 ### 3. Use of kubernetes service account that assumes an IAM role, and use of AWS Secretsmanager for spyderbat credentials management.
-Explanation
-Sample config
+- Explanation
+- Sample config
 
 
