@@ -1,5 +1,20 @@
 # Installation guidelines for the aws agent helm chart
+## Getting the spyderbat aws-agent helmchart
 
+To add the aws agent helmchart to your helm repo, run the following:
+```bash
+helm repo add awsagent https://spyderbat.github.io/aws_agent_helmchart/
+helm repo update
+```
+
+
+## Preparing the configuration
+## Running the helm chart install
+You can now run the install, by running:
+```bash
+helm install awsagent awsagent/
+```
+## Troubleshooting 
 For detailed configurable settings you can control for the aws agent helm chart, please refer to the [README.md](README.md)
 
 An important factor to consider for your configuration is how to configure credentials and permission to the AWS resources being polled by the AWS agent. 
