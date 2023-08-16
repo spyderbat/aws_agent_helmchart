@@ -42,7 +42,7 @@ spec:
           configMap:
             name: aws-agent-configmap
         - name: secrets-volume
-{{- if .Values.secretsManager.enabled }}
+{{- if .Values.awsSecretsManager.enabled }}
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
