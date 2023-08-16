@@ -34,6 +34,7 @@ The configuration settings for the AWS Agents are:
 |Parameter | Default Value | Details |
 |----------|---------------|---------|
 | spyderbat_org | "your spyderbat org id here"| The spyderbat organization id the agent will send its data to. You must provide your spyderbat organization id for the agent to work|
+| spyderbat_source | | The spyderbat source id that the aws agent got registered as. If not provided, a source_id based on the spyderbat_org will be used. *TODO* - _We need registration tooling upfront to support registering a source upfront of the helm chart_ |
 | spyderbat_api_url| https://api.prod.spyderbat.com | This is the API endpoint for the spyderbat api. There should be no need to change this default for production deployments|
 | send_buffer_size | 50 | This is a flow control setting for the data transport to the spyderbat backend. The aws agent will wait and accumulate to upt to the send_buffer_size of messages before it initiates a data transfer to the backend. This can be overruled by send_buffer_bytes_size and send_buffer_max_delay setting|
 | send_buffer_bytes_size| 10000 | This is a flow control setting for the data transport to the spyderbat backend. The aws agent will wait and accumulate to upt to the send_buffer_size_bytes of total size of all messages in the send buffer before it initiates a data transfer to the backend. This can be overruled by send_buffer_size and send_buffer_max_delay setting|
