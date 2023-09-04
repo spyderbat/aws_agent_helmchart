@@ -77,6 +77,12 @@ awsAgentConfig:
     - region: us-east-1
     - region: us-east-2
     - region: us-west-1
+  kinesis:
+    - region: us-west-2
+      stream_name: eks-integrationc1
+      shards: []
+      checkpoint: /opt/spyderbat/aws_agent/checkpoints/eks-integrationc1.json
+      message_type: eks-audit
 
 credentials:
   # Optionally you can specify the aws credentials to use for the agent explicitly here
