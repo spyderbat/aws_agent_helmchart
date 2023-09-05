@@ -30,7 +30,7 @@ spec:
               mountPath: /etc/aws-config/secrets
             - name: config-volume
               mountPath: /etc/aws-config
-            - name: checkpoint
+            - name: checkpoints
               mountPath: /opt/spyderbat/aws_agent/checkpoints
           resources:
             requests:
@@ -55,7 +55,7 @@ spec:
           secret:
             secretName: aws-agent-secrets
 {{- end }}
-        - name: checkpoint
+        - name: checkpoints
           hostPath:
-            path: /opt/spyderbat/aws_agent/
+            path: /opt/spyderbat/aws_agent/checkpoints
             type: DirectoryOrCreate

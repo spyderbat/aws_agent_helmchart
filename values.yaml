@@ -81,7 +81,6 @@ awsAgentConfig:
     - region: us-west-2
       stream_name: eks-integrationc1
       shards: []
-      checkpoint: /opt/spyderbat/aws_agent/checkpoints/eks-integrationc1.json
       message_type: eks-audit
 
 credentials:
