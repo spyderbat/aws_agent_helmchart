@@ -82,6 +82,7 @@ awsAgentConfig:
       stream_name: eks-integrationc1
       shards: []
       message_type: eks-audit
+      cluster_uid: clus:mupQ8S67xUo
 
 credentials:
   # Optionally you can specify the aws credentials to use for the agent explicitly here
