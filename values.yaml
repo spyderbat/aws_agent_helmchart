@@ -76,7 +76,7 @@ awsAgentConfig:
     regions:
     - region: us-east-1
     - region: us-east-2
-    - region: us-west-1
+    - region: us-west-2
   kinesis:
     - region: us-west-2
       stream_name: eks-integrationc1
