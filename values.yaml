@@ -82,16 +82,28 @@ awsAgentConfig:
     regions:
     - region: us-east-1
     - region: us-east-2
+    - region: us-west-1
+      provisioned_clusters:
+        kubecon-demo-23-devops: clus:jAWTfPsUigA
+        kubecon-demo-23-prod: clus:HMwsB92VRCM
     - region: us-west-2
       provisioned_clusters:
         integrationc1: clus:mupQ8S67xUo
 
   kinesis:
+    - region: us-west-1
+      stream_name: eks-kubecon-demo-23
+      shards: []
+      message_type: eks-audit
+      provisioned_clusters:
+        kubecon-demo-23-devops: clus:jAWTfPsUigA
+        kubecon-demo-23-prod: clus:HMwsB92VRCM
     - region: us-west-2
       stream_name: eks-integrationc1
       shards: []
       message_type: eks-audit
-      cluster_uid: clus:mupQ8S67xUo
+      provisioned_clusters:
+        integrationc1: clus:mupQ8S67xUo
 
 credentials:
   # Optionally you can specify the aws credentials to use for the agent explicitly here
