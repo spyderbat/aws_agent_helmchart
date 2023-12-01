@@ -3,7 +3,7 @@ entries:
   aws_agent:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.593732508Z"
+    created: "2023-12-01T21:54:55.524905381Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: b0091652603e62b9a8fc9764136ace8d3c09343763d73e53c4770f38b234b32e
@@ -15,7 +15,7 @@ entries:
   aws_agent_helmchart:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.59466584Z"
+    created: "2023-12-01T21:54:55.525980595Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: 79feb4addb6071fe537865520118b4eb6356f56d11815d44a6bde11f957a5559
@@ -27,7 +27,18 @@ entries:
   awsagent:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.600864381Z"
+    created: "2023-12-01T21:54:55.550181961Z"
+    description: A Helm chart for the spyderbat AWS agent collecting AWS data and
+      sending it to the spyderbat backend
+    digest: a010b54fb051a67808398b9ec55e65b701fcd23fac45770efe5c3772937f841a
+    name: awsagent
+    type: application
+    urls:
+    - awsagent-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-12-01T21:54:55.548106632Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: 84fbced266a7ac5385ab0111c9d14ad020101d65ac63388e6551b7539d21ed48
@@ -38,7 +49,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.599650855Z"
+    created: "2023-12-01T21:54:55.546112565Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: cd7f23858bd6b4bcecb46d9a3f2056d98eab8ab405702e9e11b839aa5a83b5d1
@@ -49,7 +60,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.598632172Z"
+    created: "2023-12-01T21:54:55.531629928Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: a5102d048544e5c90f233f4f34a87ca4cf58b6f6d54fee281049f975e1f05168
@@ -60,7 +71,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.597565518Z"
+    created: "2023-12-01T21:54:55.530264202Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: 061a60e7d71a2553099612024c7331fee15b42c7665f9954ca5494a167ed20f8
@@ -71,7 +82,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.596409023Z"
+    created: "2023-12-01T21:54:55.528638876Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: 9a10dc909b284ff04eb8f4dc7ac08c3dabb8a44585b4c29232dbb8c601646187
@@ -82,7 +93,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-19T12:20:44.595521191Z"
+    created: "2023-12-01T21:54:55.527269241Z"
     description: A Helm chart for the spyderbat AWS agent collecting AWS data and
       sending it to the spyderbat backend
     digest: d3f826a5d67ae1fe6835a4b5deba4026f86c99e6cf0a31a58b86db8caaaa2ce0
@@ -91,4 +102,4 @@ entries:
     urls:
     - awsagent-0.1.2.tgz
     version: 0.1.2
-generated: "2023-10-19T12:20:44.592647614Z"
+generated: "2023-12-01T21:54:55.515426834Z"
