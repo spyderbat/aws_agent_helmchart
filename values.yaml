@@ -89,6 +89,8 @@ awsAgentConfig:
     - region: us-west-2
       provisioned_clusters:
         integrationc1: clus:mupQ8S67xUo
+  - service: iam
+    polling_interval: 30
 
   kinesis:
     - region: us-west-1
