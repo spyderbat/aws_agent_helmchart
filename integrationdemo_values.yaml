@@ -4,10 +4,9 @@
 
 # Agent aws service collection settings
 awsAgentConfig:
-  # The spyderbat org id for your organization
-  spyderbat_org: KNUJF8M43WcT2o1qgEts
   # The spyderbat api url
-  spyderbat_api_url: https://api.kangaroobat.net
+  spyderbat_api_url: https://orc.kangaroobat.net
+  cluster_name: integrationc2
 
 awsSecretsManager:
   enabled: true
