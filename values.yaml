@@ -79,7 +79,7 @@ awsAgentsConfigs:
   # You can configure multiple agents to run, each with their own settings
 
   # The aws account you want to monitor with this agent
-  - aws_account_id: "429857113775"
+  - aws_account_id: "<aws_account_id>"
 
     # Optionally, you can specify which aws role to assume to pull data
     # role_arn: arn:aws:iam::<account>:role/<spyderbat-aws-agent-role>
@@ -136,19 +136,16 @@ awsAgentsConfigs:
       polling_interval: 30
       regions:
       - region: us-east-1
-      - region: us-east-2
-      - region: us-west-1
         # If there is a spyderbat cluster monitor provisioned running
         # for the cluster, specify the spyderbat cluster_uid mapping to
         # the eks cluster name here, so that spyderbat can associate the
         # eks meta information with the kubernetes information pulled
         # via the kubernetes api
         provisioned_clusters:
-          kubecon-demo-23-devops: clus:jAWTfPsUigA
-          kubecon-demo-23-prod: clus:HMwsB92VRCM
+          <eks-cluster-name>: <spyderbat-cluster-uid>
+      - region: us-east-2
+      - region: us-west-1
       - region: us-west-2
-        provisioned_clusters:
-          integrationc1: clus:mupQ8S67xUo
     - service: iam
       polling_interval: 30
 
@@ -156,7 +153,7 @@ awsAgentsConfigs:
     # logs.
     # kinesis:
     #   - region: us-west-1
-    #     stream_name: eks-kubecon-demo-23
+    #     stream_name: <kinesis-stream-name>
     #     shards: []
     #     message_type: eks-audit
     #     # If there is a spyderbat cluster monitor provisioned running
@@ -165,14 +162,13 @@ awsAgentsConfigs:
     #     # eks meta information with the kubernetes information pulled
     #     # via the kubernetes api
     #     provisioned_clusters:
-    #       kubecon-demo-23-prod: clus:HMwsB92VRCM
-    #       kubecon-demo-23-devops: clus:jAWTfPsUigA
+    #       <eks-cluster-name>: <spyderbat-cluster-uid>
     #   - region: us-west-2
-    #     stream_name: eks-integrationc1
+    #     stream_name: <kinesis-stream-name>
     #     shards: []
     #     message_type: eks-audit
     #     provisioned_clusters:
-    #       integrationc1: clus:mupQ8S67xUo
+    #       <eks-cluster-name>: <spyderbat-cluster-uid>
 
 
 
