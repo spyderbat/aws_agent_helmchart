@@ -21,111 +21,6 @@ resources:
     cpu: 1000m
     memory: 2048Mi
 
-# Agent aws service collection settings
-awsAgentConfig:
-  # The spyderbat api url
-  spyderbat_api_url: https://orc.spyderbat.com
-
-  # The aws account you want to monitor with this agent
-  aws_account_id: 429857113775
-
-  # Optionally, you can specify which aws role to assume to pull data
-  # role_arn: arn:aws:iam::<account>:role/<spyderbat-aws-agent-role>
-
-  # If the agent is installed on a cluster, you can provide the cluster_name
-  # here. This is useful for understanding where the agent is running
-  # when looking at agent health and data sources in the spyderbat ui
-  # cluster_name: my-cluster
-
-  # Flow control settings for the aws-agent spyderbat api send queue
-  # Nr of messages in queue prior to sending
-  send_buffer_size: 50
-
-  # Flow control settings for the aws-agent spyderbat api send queue
-  # Total size in bytes of messages in queue prior to sending
-  send_buffer_records_bytes: 1000000
-
-  # The send buffer max delay if less than send_buffer_size messages
-  # are in the queue or send_buffer_records_bytes bytes are in the queue
-  send_buffer_max_delay: 15
-
-  # The log level for the agent
-  log_level: INFO
-
-  # AWS context and logs pulled using regular polling
-  pollers:
-  # Collect AWS GuardDuty findings with the guardduty poller
-  - service: guardduty
-
-    # The polling interval in seconds
-    polling_interval: 30
-
-    # The initial lookback in seconds when polling guardduty findings for the first time
-    initial_lookback: 86400
-    # Which regions to poll, and with what settings. You can override the
-    # general settings (polling_interval and initial_loopback) per region
-    # by adding these properties to the region map
-    regions:
-    - region: us-east-1
-    - region: us-east-2
-    - region: us-west-2
-
-  # Collect information about EC2 instances with the ec2 poller
-  - service: ec2
-
-    # The polling interval in seconds
-    polling_interval: 30
-
-    # Which regions to poll, and with what settings. You can override the
-    # polling_interval per region by adding it to the region map
-    regions:
-    - region: us-east-1
-    - region: us-east-2
-    - region: us-west-2
-
-  # Collect meta information about what EKS clusters are running with the eks poller
-  - service: eks
-    polling_interval: 30
-    regions:
-    - region: us-east-1
-    - region: us-east-2
-    - region: us-west-1
-      # If there is a spyderbat cluster monitor provisioned running
-      # for the cluster, specify the spyderbat cluster_uid mapping to
-      # the eks cluster name here, so that spyderbat can associate the
-      # eks meta information with the kubernetes information pulled
-      # via the kubernetes api
-      provisioned_clusters:
-        kubecon-demo-23-devops: clus:jAWTfPsUigA
-        kubecon-demo-23-prod: clus:HMwsB92VRCM
-    - region: us-west-2
-      provisioned_clusters:
-        integrationc1: clus:mupQ8S67xUo
-  - service: iam
-    polling_interval: 30
-
-  # Collect audit logs from EKS clusters with the kinesis feed for eks-audit
-  # logs.
-  # kinesis:
-  #   - region: us-west-1
-  #     stream_name: eks-kubecon-demo-23
-  #     shards: []
-  #     message_type: eks-audit
-  #     # If there is a spyderbat cluster monitor provisioned running
-  #     # for the cluster, specify the spyderbat cluster_uid mapping to
-  #     # the eks cluster name here, so that spyderbat can associate the
-  #     # eks meta information with the kubernetes information pulled
-  #     # via the kubernetes api
-  #     provisioned_clusters:
-  #       kubecon-demo-23-devops: clus:jAWTfPsUigA
-  #       kubecon-demo-23-prod: clus:HMwsB92VRCM
-  #   - region: us-west-2
-  #     stream_name: eks-integrationc1
-  #     shards: []
-  #     message_type: eks-audit
-  #     provisioned_clusters:
-  #       integrationc1: clus:mupQ8S67xUo
-
 # Our recommended approach for managing the aws api credentials is to use
 # a kubernetes service accounts that assumes an IAM role.
 serviceAccount:
@@ -145,6 +40,7 @@ serviceAccount:
   # permissions to interact with AWS services that the service account will assume
   awsRoleArn: arn of the IAM role that the service account should assume
 
+
 # Our recommended approach for managing the spyderbat api key is to use aws secrets manager
 # to store the key. If you choose to use this approach, set enabled to true and
 # specify the secret arn where the spyderbat api key is stored. The
@@ -158,15 +54,126 @@ credentials:
   # However, optionally you can specify the aws credentials to use for the
   # agent explicitly here. We recommend setting these with the
   # --set option during helm install rather than storing them in the values.yaml
-  aws_access_key_id:
-  aws_secret_access_key:
+  # aws_access_key_id:
+  # aws_secret_access_key:
 
   # Our recommended approach for accessing the spyderbat registration key is
   # to use a secret manager like awsSecretsManager. However, if you are not
-  # running in aws or choose not to use it, the spyderbat_api_key can be managed
+  # running in aws or choose not to use it, the spyderbat_registration_key can be managed
   # in a kubernetes secret as well. If you choose to do so, you can specify the
   # key in this setting. We recommend setting this with the --set option during
   # helm install, and not storing it in the values.yaml
-  spyderbat_api_key:
+  # spyderbat_registration_key:
+
+# The spyderbat api url
+spyderbatApiUrl: https://orc.spyderbat.com
+
+# If the agent is installed on a cluster, you can provide the cluster_name
+# here. This is useful for understanding where the agent is running
+# when looking at agent health and data sources in the spyderbat ui
+# cluster_name: my-cluster
+
+# Agent aws service collection settings
+awsAgentsConfigs:
+
+  # You can configure multiple agents to run, each with their own settings
+
+  # The aws account you want to monitor with this agent
+  - aws_account_id: "429857113775"
+
+    # Optionally, you can specify which aws role to assume to pull data
+    # role_arn: arn:aws:iam::<account>:role/<spyderbat-aws-agent-role>
+
+
+    # Flow control settings for the aws-agent spyderbat api send queue
+    # Nr of messages in queue prior to sending
+    send_buffer_size: 50
+
+    # Flow control settings for the aws-agent spyderbat api send queue
+    # Total size in bytes of messages in queue prior to sending
+    send_buffer_records_bytes: 1000000
+
+    # The send buffer max delay if less than send_buffer_size messages
+    # are in the queue or send_buffer_records_bytes bytes are in the queue
+    send_buffer_max_delay: 15
+
+    # The log level for the agent
+    log_level: INFO
+
+    # AWS context and logs pulled using regular polling
+    pollers:
+    # Collect AWS GuardDuty findings with the guardduty poller
+    - service: guardduty
+
+      # The polling interval in seconds
+      polling_interval: 30
+
+      # The initial lookback in seconds when polling guardduty findings for the first time
+      initial_lookback: 86400
+      # Which regions to poll, and with what settings. You can override the
+      # general settings (polling_interval and initial_loopback) per region
+      # by adding these properties to the region map
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-2
+
+    # Collect information about EC2 instances with the ec2 poller
+    - service: ec2
+
+      # The polling interval in seconds
+      polling_interval: 30
+
+      # Which regions to poll, and with what settings. You can override the
+      # polling_interval per region by adding it to the region map
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-2
+
+    # Collect meta information about what EKS clusters are running with the eks poller
+    - service: eks
+      polling_interval: 30
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+        # If there is a spyderbat cluster monitor provisioned running
+        # for the cluster, specify the spyderbat cluster_uid mapping to
+        # the eks cluster name here, so that spyderbat can associate the
+        # eks meta information with the kubernetes information pulled
+        # via the kubernetes api
+        provisioned_clusters:
+          kubecon-demo-23-devops: clus:jAWTfPsUigA
+          kubecon-demo-23-prod: clus:HMwsB92VRCM
+      - region: us-west-2
+        provisioned_clusters:
+          integrationc1: clus:mupQ8S67xUo
+    - service: iam
+      polling_interval: 30
+
+    # Collect audit logs from EKS clusters with the kinesis feed for eks-audit
+    # logs.
+    # kinesis:
+    #   - region: us-west-1
+    #     stream_name: eks-kubecon-demo-23
+    #     shards: []
+    #     message_type: eks-audit
+    #     # If there is a spyderbat cluster monitor provisioned running
+    #     # for the cluster, specify the spyderbat cluster_uid mapping to
+    #     # the eks cluster name here, so that spyderbat can associate the
+    #     # eks meta information with the kubernetes information pulled
+    #     # via the kubernetes api
+    #     provisioned_clusters:
+    #       kubecon-demo-23-prod: clus:HMwsB92VRCM
+    #       kubecon-demo-23-devops: clus:jAWTfPsUigA
+    #   - region: us-west-2
+    #     stream_name: eks-integrationc1
+    #     shards: []
+    #     message_type: eks-audit
+    #     provisioned_clusters:
+    #       integrationc1: clus:mupQ8S67xUo
+
+
 
 
