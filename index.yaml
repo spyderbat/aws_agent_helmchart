@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  awsagent:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-11-12T18:44:45.048203481Z"
+    description: A Helm chart for the spyderbat AWS agent collecting AWS data and
+      sending it to the spyderbat backend
+    digest: 139aa400a4ae072592ca828b7d940c5f8dc3c6f7d5329387b8e1897476e047be
+    name: awsagent
+    type: application
+    urls:
+    - https://github.com/spyderbat/aws_agent_helmchart/releases/download/awsagent-0.0.1/awsagent-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-11-12T18:44:45.04821352Z"
