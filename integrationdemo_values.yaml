@@ -1,16 +1,90 @@
-# local test values for aws_agent_helmchart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+spyderbatApiUrl: https://orc.kangaroobat.net
+clusterName: integrationc2
+awsAgentsConfigs:
+  - aws_account_id: "211125369423"
+    role_arn: arn:aws:iam::211125369423:role/spyderbat-aws-agent-poller-role
+    log_level: DEBUG
+    pollers:
+    - service: guardduty
+      polling_interval: 30
+      initial_lookback: 86400
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
 
-# Agent aws service collection settings
-awsAgentConfig:
-  # The spyderbat api url
-  spyderbat_api_url: https://orc.kangaroobat.net
-  cluster_name: integrationc2
+    - service: ec2
+      polling_interval: 30
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
+
+    - service: eks
+      polling_interval: 30
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
+        provisioned_clusters:
+          integrationc1: clus:mupQ8S67xUo
+    - service: iam
+      polling_interval: 30
+
+  - aws_account_id: "429857113775"
+    role_arn: arn:aws:iam::429857113775:role/spyderbat-aws-agent-poller-role
+    log_level: DEBUG
+    pollers:
+    - service: guardduty
+      polling_interval: 30
+      initial_lookback: 86400
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
+
+    - service: ec2
+      polling_interval: 30
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
+
+    - service: eks
+      polling_interval: 30
+      regions:
+      - region: us-east-1
+      - region: us-east-2
+      - region: us-west-1
+      - region: us-west-2
+        provisioned_clusters:
+          integrationc1: clus:mupQ8S67xUo
+    - service: iam
+      polling_interval: 30
+
+    kinesis:
+    - region: us-west-2
+      stream_name: eks-audit-productionc1
+      shards: []
+      message_type: eks-audit
+    - region: us-west-2
+      stream_name: eks-audit-integrationc1
+      shards: []
+      message_type: eks-audit
+
+
+
 
 awsSecretsManager:
   enabled: true
   secretArn: arn:aws:secretsmanager:us-west-2:429857113775:secret:integration/aws-agent-secrets-Fqngkp
 
 serviceAccount:
-  awsRoleArn: arn:aws:iam::429857113775:role/spyderbat-aws-agent-role
+  enabled: true
+  awsRoleArn: arn:aws:iam::429857113775:role/spyderbat-aws-agent-sender-role
+

@@ -1,4 +1,8 @@
 # aws_agent_helmchart
+
+TODO - update docs - most simple install approach:
+ helm install --set spyderbat_orc_url=https://orc.kangaroobat.net --set serviceAccount.awsRoleArn=arn:aws:iam::429857113775:role/spyderbat-aws-agent-sender-poller-role --set credentials.spyderbat_registration_key=<registration_key> awsagentk8s .
+
 Public Spyderbat AWS Agent Helm Chart repository
 
 Default settings that can be altered in the Values.yaml are:

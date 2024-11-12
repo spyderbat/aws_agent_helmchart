@@ -8,7 +8,7 @@ metadata:
 data:
   aws-agent.yaml: |
     {{- . | toYaml | nindent 4 }}
-    spyderbat_api_url: {{ $.Values.spyderbatApiUrl }}
+    spyderbat_orc_url: {{ $.Values.spyderbat_orc_url }}
     cluster_name: {{ $.Values.clusterName }}
 {{- end }}
 
