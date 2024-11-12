@@ -1,3 +1,9 @@
 my_values.yaml
-integrationdemo2_values.yaml
+values-*.yaml
+integrationdemo*.yaml
+aws_edge.yaml
+aws_integration.yaml
+single_account.yaml
 *.json
+*.txt
+.nvimlog

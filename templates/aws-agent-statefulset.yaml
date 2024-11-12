@@ -26,6 +26,7 @@ spec:
       containers:
         - name: aws-agent
           image: {{ $.Values.image.registry}}/{{ $.Values.image.repository }}:{{ $.Values.image.tag }}
+          args: ["-c", "/etc/aws-config/aws-agent.yaml"]
           imagePullPolicy: {{ $.Values.image.pullPolicy }}
           volumeMounts:
             - name: secrets-volume
@@ -41,6 +42,7 @@ spec:
             limits:
               cpu: {{ $.Values.resources.limits.cpu }}
               memory: {{ $.Values.resources.limits.memory }}
+
 
       volumes:
         - name: config-volume
